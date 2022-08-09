@@ -21,14 +21,24 @@ SF_PASSWORD   = os.getenv('SF_PASSWORD')
 SF_ROLE   = os.getenv('SF_ROLE')
 
 
+def load_data():
+    xlsx = pd.ExcelFile('Matriculas.xlsx')
+    df=pd.read_excel(xlsx, sheet_name='Matricula')
 
-# df= pd.read_csv("Diplomas.csv")  #LOAD FILE INTO DATA FRAME
-# df.info()
-# df 
+    df=df.assign(YEAR=df["AÑO"])
+    df=df[["YEAR","TIPO_MATRICULA","UNIVERSIDAD","SEDE_CONARE","TIPO_SEDE","REGION_PLANIFICACION_SEDE","CARRERA","GRADO_ACADEMICO","NIVEL_ACADEMICO","AREA_CONOCIMIENTO",
+    "DISCIPLINA","STEM_MICITT","SEXO","EDAD","PROVINCIA_ESTUDIANTE","CANTON_ESTUDIANTE","DISTRITO_ESTUDIANTE",
+    "PAIS_ESTUDIANTE","TIPO_NACIONALIDAD"]] 
+    
+    print(df.head(5))
 
+    
 
-# df_cor=df.assign(YEAR=df["AÑO"])
-# df_cor=df_cor[["YEAR","SECTOR_UNIVERSITARIO","UNIVERSIDAD","SEDE_CONARE","TIPO_SEDE","REGION_PLANIFICACION_SEDE","CARRERA","GRADO_ACADEMICO","NIVEL_ACADEMICO","AREA_CONOCIMIENTO","STEM_MICITT","SEXO","EDAD","PROVINCIA_GRADUADO","CANTON_GRADUADO","DISTRITO_GRADUADO","TIPO_NACIONALIDAD"]] #FILTER
+if __name__ == "__main__":
+
+    load_data()
+
+ #FILTER
 #df_cor.info()
 #df_cor
 #df_cor = df_cor.drop(df_cor[df_cor.PROVINCIA_GRADUADO =='Sin Información'].index) 
